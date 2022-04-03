@@ -1,0 +1,65 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 debug pnpm:package-manifest": {
+    "initial": {
+      "name": "user-management",
+      "version": "1.0.0",
+      "description": "",
+      "main": "server.ts",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "author": "nd2k",
+      "license": "MIT"
+    },
+    "prefix": "C:\\Lab\\typescript\\express\\user-management"
+  },
+  "2 debug pnpm:context": {
+    "currentLockfileExists": false,
+    "storeDir": "C:\\Users\\nicol\\.pnpm-store\\v3",
+    "virtualStoreDir": "C:\\Lab\\typescript\\express\\user-management\\node_modules\\.pnpm"
+  },
+  "3 debug pnpm:stage": {
+    "prefix": "C:\\Lab\\typescript\\express\\user-management",
+    "stage": "resolution_started"
+  },
+  "4 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/typescript/4.6.3",
+    "wanted": {
+      "dependentId": ".",
+      "name": "typescript",
+      "rawSpec": "latest"
+    }
+  },
+  "5 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/typescript/4.6.3",
+    "requester": "C:\\Lab\\typescript\\express\\user-management",
+    "status": "resolved"
+  },
+  "6 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/typescript/4.6.3",
+    "requester": "C:\\Lab\\typescript\\express\\user-management",
+    "status": "found_in_store"
+  },
+  "7 error pnpm": {
+    "code": "ERR_PNPM_FETCH_404",
+    "hint": "node-ts-dev is not in the npm registry, or you have no permission to fetch it.\n\nAn authorization header was used: Bearer npm_[hidden]",
+    "request": {
+      "authHeaderValue": "Bearer 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",
+      "url": "https://registry.npmjs.org/node-ts-dev"
+    },
+    "response": {
+      "size": 0
+    },
+    "pkgName": "node-ts-dev",
+    "pkgsStack": [],
+    "err": {
+      "name": "pnpm",
+      "message": "GET https://registry.npmjs.org/node-ts-dev: Not Found - 404",
+      "code": "ERR_PNPM_FETCH_404",
+      "stack": "pnpm: GET https://registry.npmjs.org/node-ts-dev: Not Found - 404\n    at RetryOperation._fn (C:\\Users\\nicol\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.4\\node_modules\\pnpm\\dist\\pnpm.cjs:85721:19)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"
+    }
+  }
+}
