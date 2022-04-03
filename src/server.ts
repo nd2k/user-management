@@ -1,16 +1,16 @@
 import config from './config/config';
-import express, { Request, Response } from 'express';
+import express from 'express';
+import { identificationRoutes } from './routes/identification';
+import log from './utils/logger';
+import connect from './database/connect';
 
 const PORT: number = config.PORT;
-const TEST: string = config.TEST;
 
 const server = express();
 server.use(express.json());
 
-server.get('/', (req: Request, res: Response) => {
-  return res.send({ connectivityTest: 'OK', test: TEST }).status(200);
-});
-
-server.listen(PORT, () => {
-  console.log(`Server is running on port -- http://localhost:${PORT}`);
+server.listen(PORT, async () => {
+  log.info(`Server is running on port -- http://localhost:${PORT}`);
+  await connect();
+  identificationRoutes(server);
 });

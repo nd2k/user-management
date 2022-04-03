@@ -10,12 +10,16 @@ dotenv.config({ path: path.resolve(__dirname, '../config/config.env') });
 
 interface ENV {
   PORT: number | undefined;
-  TEST: string | undefined;
+  BASE_URL: string | undefined;
+  SALT_WORK_FACTOR: number | undefined;
+  MONGO_URI: string | undefined;
 }
 
 interface Config {
   PORT: number;
-  TEST: string;
+  BASE_URL: string;
+  SALT_WORK_FACTOR: number;
+  MONGO_URI: string;
 }
 
 // Loading process.env as ENV interface
@@ -23,7 +27,13 @@ interface Config {
 const getConfig = (): ENV => {
   return {
     PORT: process.env.PORT ? Number(process.env.PORT) : undefined,
-    TEST: process.env.TEST ? String(process.env.TEST) : undefined,
+    BASE_URL: process.env.BASE_URL ? String(process.env.BASE_URL) : undefined,
+    SALT_WORK_FACTOR: process.env.SALT_WORK_FACTOR
+      ? Number(process.env.SALT_WORK_FACTOR)
+      : undefined,
+    MONGO_URI: process.env.MONGO_URI
+      ? String(process.env.MONGO_URI)
+      : undefined,
   };
 };
 
