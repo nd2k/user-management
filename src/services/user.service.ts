@@ -9,7 +9,7 @@ import { omit } from 'lodash';
  */
 export const createUser = async (
   input: DocumentDefinition<
-    Omit<UserDocument, 'createdAt' | 'updatedAt' | 'comparePassword'>
+    Omit<UserDocument, 'createdAt' | 'updatedAt' | 'comparePassword' | 'role'>
   >
 ) => {
   try {

@@ -15,7 +15,7 @@ export const signJwt = (
   options?: jwt.SignOptions | undefined
 ) => {
   return jwt.sign(object, PRIVATE_KEY, {
-    ...(options && options),
+    ...options,
     algorithm: 'RS256',
   });
 };
@@ -36,7 +36,7 @@ export const verifyJwt = (token: string) => {
   } catch (e: any) {
     return {
       valid: false,
-      expired: e.message === 'Token expired',
+      expired: true,
       decoded: null,
     };
   }

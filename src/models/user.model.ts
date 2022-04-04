@@ -2,10 +2,16 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import config from '../config/config';
 
+export enum Roles {
+  ADMIN = 'ADMIN',
+  DEFAULT = 'DEFAULT',
+}
+
 export interface UserDocument extends mongoose.Document {
   email: string;
   name: string;
   password: string;
+  role: string;
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
@@ -19,12 +25,17 @@ const UserSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     password: { type: String, required: true },
+    role: { type: String },
   },
   { timestamps: true }
 );
 
 UserSchema.pre('save', async function (next) {
   const user = this as UserDocument;
+
+  if (!user.role) {
+    user.role = Roles.DEFAULT;
+  }
   if (!user.isModified('password')) {
     return next();
   }
