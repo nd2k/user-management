@@ -1,6 +1,11 @@
 import { Request, Response } from 'express';
+import { omit } from 'lodash';
 import { CreateUserInput } from '../schemas/user.schema';
-import { createUser } from '../services/user.service';
+import {
+  createUser,
+  findUser,
+  updateUserDetails,
+} from '../services/user.service';
 import log from '../utils/logger.util';
 
 /**
@@ -20,4 +25,27 @@ export const createUserHandler = async (
     log.error(e);
     return res.status(409).send(e.message);
   }
+};
+
+/**
+ * Get User Details Handler is getting all the user's details
+ * @param req - request received from client
+ * @param res - response sent to client
+ * @returns details user
+ */
+export const getUserDetailsHandler = async (req: Request, res: Response) => {
+  const userId: string = req.params.userId;
+  const user = await findUser({ _id: userId });
+  if (user) {
+    return res.send(user).status(200);
+  }
+  return res.send('No user found').status(404);
+};
+
+export const updateUserDetailsHandler = async (
+  req: Request<{}, {}, CreateUserInput['body']>,
+  res: Response
+) => {
+  const user = await updateUserDetails(req.body);
+  return res.send(user).status(200);
 };

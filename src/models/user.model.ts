@@ -11,7 +11,7 @@ export interface UserDocument extends mongoose.Document {
   email: string;
   name: string;
   password: string;
-  role: string;
+  role?: string;
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
@@ -39,6 +39,15 @@ UserSchema.pre('save', async function (next) {
   if (!user.isModified('password')) {
     return next();
   }
+  const salt = await bcrypt.genSalt(config.SALT_WORK_FACTOR);
+  const hashPassword = bcrypt.hashSync(user.password, salt);
+  user.password = hashPassword;
+  return next();
+});
+
+UserSchema.pre('findOneAndUpdate', async function (next) {
+  // const user = this._update as UserDocument;
+  const user = this.cast(this.model, this.getUpdate());
   const salt = await bcrypt.genSalt(config.SALT_WORK_FACTOR);
   const hashPassword = bcrypt.hashSync(user.password, salt);
   user.password = hashPassword;

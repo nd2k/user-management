@@ -9,7 +9,7 @@ import { omit } from 'lodash';
  */
 export const createUser = async (
   input: DocumentDefinition<
-    Omit<UserDocument, 'createdAt' | 'updatedAt' | 'comparePassword' | 'role'>
+    Omit<UserDocument, 'createdAt' | 'updatedAt' | 'comparePassword'>
   >
 ) => {
   try {
@@ -53,4 +53,24 @@ export const validatePassword = async ({
  */
 export const findUser = async (query: FilterQuery<UserDocument>) => {
   return UserModel.findOne(query).lean();
+};
+
+export const updateUserDetails = async (
+  input: DocumentDefinition<
+    Omit<UserDocument, 'createdAt' | 'updatedAt' | 'comparePassword'>
+  >
+) => {
+  try {
+    const query = { email: input.email };
+    const updatedUser = input;
+    const options = { new: true };
+    const newUser = await UserModel.findOneAndUpdate(
+      query,
+      updatedUser,
+      options
+    );
+    return newUser;
+  } catch (e: any) {
+    throw new Error(e);
+  }
 };

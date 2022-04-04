@@ -1,6 +1,10 @@
 import config from '../config/config';
 import { Express } from 'express';
-import { createUserHandler } from '../controllers/user.controller';
+import {
+  createUserHandler,
+  getUserDetailsHandler,
+  updateUserDetailsHandler,
+} from '../controllers/user.controller';
 import validateResource from '../middlewares/validateResource';
 import { createUserSchema } from '../schemas/user.schema';
 import {
@@ -29,4 +33,10 @@ export const userRoutes = (server: Express) => {
   );
   server.get(BASE_URL + '/sessions', requiredUser, getSessionsHandler);
   server.delete(BASE_URL + '/sessions', requiredUser, deleteSessionHandler);
+  server.get(BASE_URL + '/users/:userId', requiredUser, getUserDetailsHandler);
+  server.patch(
+    BASE_URL + '/users',
+    [validateResource(createUserSchema), requiredUser],
+    updateUserDetailsHandler
+  );
 };
