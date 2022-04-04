@@ -13,6 +13,10 @@ interface ENV {
   BASE_URL: string | undefined;
   SALT_WORK_FACTOR: number | undefined;
   MONGO_URI: string | undefined;
+  PUBLIC_KEY: string | undefined;
+  PRIVATE_KEY: string | undefined;
+  ACCESS_TOKEN_DURATION: string | undefined;
+  REFRESH_TOKEN_DURATION: string | undefined;
 }
 
 interface Config {
@@ -20,6 +24,10 @@ interface Config {
   BASE_URL: string;
   SALT_WORK_FACTOR: number;
   MONGO_URI: string;
+  PUBLIC_KEY: string;
+  PRIVATE_KEY: string;
+  ACCESS_TOKEN_DURATION: string;
+  REFRESH_TOKEN_DURATION: string;
 }
 
 // Loading process.env as ENV interface
@@ -33,6 +41,18 @@ const getConfig = (): ENV => {
       : undefined,
     MONGO_URI: process.env.MONGO_URI
       ? String(process.env.MONGO_URI)
+      : undefined,
+    PUBLIC_KEY: process.env.PUBLIC_KEY
+      ? String(process.env.PUBLIC_KEY)
+      : undefined,
+    PRIVATE_KEY: process.env.PRIVATE_KEY
+      ? String(process.env.PRIVATE_KEY)
+      : undefined,
+    ACCESS_TOKEN_DURATION: process.env.ACCESS_TOKEN_DURATION
+      ? String(process.env.ACCESS_TOKEN_DURATION)
+      : undefined,
+    REFRESH_TOKEN_DURATION: process.env.REFRESH_TOKEN_DURATION
+      ? String(process.env.REFRESH_TOKEN_DURATION)
       : undefined,
   };
 };
