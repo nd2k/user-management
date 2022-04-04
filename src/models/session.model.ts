@@ -9,6 +9,9 @@ export interface SessionDocument extends mongoose.Document {
   updatedAt: Date;
 }
 
+/**
+ * Session Schema is the schema related to Session object
+ */
 const SessionSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

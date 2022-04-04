@@ -3,6 +3,13 @@ import { get } from 'lodash';
 import { reIssueAccessToken } from '../services/session.service';
 import { verifyJwt } from '../utils/jwt.util';
 
+/**
+ * Deserialize User is a middleware used to deserialize a user from AccessToken or RefreshToken
+ * @param req - request received from client
+ * @param res - response sent to client
+ * @param next - next middleware
+ * @returns a user attached to the response - locals
+ */
 const deserializeUser = async (
   req: Request,
   res: Response,
@@ -27,7 +34,7 @@ const deserializeUser = async (
     return next();
   }
 
-  if (!expired && refreshToken) {
+  if (expired && refreshToken) {
     const newAccessToken = await reIssueAccessToken({ refreshToken });
     console.log(newAccessToken);
 

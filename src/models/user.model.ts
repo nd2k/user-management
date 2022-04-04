@@ -11,6 +11,9 @@ export interface UserDocument extends mongoose.Document {
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
+/**
+ * User Schema is the schema related to User object
+ */
 const UserSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },

@@ -1,5 +1,8 @@
 import { object, string, TypeOf } from 'zod';
 
+/**
+ * Create User Schema is creating a user validation schema
+ */
 export const createUserSchema = object({
   body: object({
     name: string({

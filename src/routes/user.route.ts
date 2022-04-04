@@ -13,6 +13,9 @@ import requiredUser from '../middlewares/requiredUser';
 
 const BASE_URL: string = config.BASE_URL;
 
+/**
+ * User Routes is all the available routes for user resource
+ */
 export const userRoutes = (server: Express) => {
   server.post(
     BASE_URL + '/users',

@@ -3,6 +3,12 @@ import { CreateUserInput } from '../schemas/user.schema';
 import { createUser } from '../services/user.service';
 import log from '../utils/logger.util';
 
+/**
+ * Create User Handler is creating the user
+ * @param req - request received from client
+ * @param res - response sent to client
+ * @returns a created user
+ */
 export const createUserHandler = async (
   req: Request<{}, {}, CreateUserInput['body']>,
   res: Response

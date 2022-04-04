@@ -2,6 +2,9 @@ import mongoose from 'mongoose';
 import config from '../config/config';
 import log from '../utils/logger.util';
 
+/**
+ * Connect is connecting to MongoDb
+ */
 const connect = async () => {
   const MONGO_URI = config.MONGO_URI;
 

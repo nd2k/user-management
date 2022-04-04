@@ -2,6 +2,11 @@ import { DocumentDefinition, FilterQuery } from 'mongoose';
 import UserModel, { UserDocument } from '../models/user.model';
 import { omit } from 'lodash';
 
+/**
+ * Create User is a service creating a new user
+ * @param input - client input
+ * @returns a user without the password
+ */
 export const createUser = async (
   input: DocumentDefinition<
     Omit<UserDocument, 'createdAt' | 'updatedAt' | 'comparePassword'>
@@ -15,6 +20,11 @@ export const createUser = async (
   }
 };
 
+/**
+ * Validate Password is a service validating the encrypted password
+ * @param loginInput - user's credentials
+ * @returns boolean
+ */
 export const validatePassword = async ({
   email,
   password,
@@ -36,6 +46,11 @@ export const validatePassword = async ({
   return omit(user.toJSON(), 'password');
 };
 
+/**
+ * Find a specific user
+ * @param query - query to get a specific user
+ * @returns a specific user
+ */
 export const findUser = async (query: FilterQuery<UserDocument>) => {
   return UserModel.findOne(query).lean();
 };

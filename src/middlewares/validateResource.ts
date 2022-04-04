@@ -1,6 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { AnyZodObject } from 'zod';
 
+/**
+ * Validate Resource is a middleware which is validating the resources sent by the client
+ * @param schema - validation schema
+ * @returns next middleware or bad request status code
+ */
 const validateResource =
   (schema: AnyZodObject) =>
   (req: Request, res: Response, next: NextFunction) => {

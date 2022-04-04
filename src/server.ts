@@ -12,6 +12,9 @@ const server = express();
 server.use(express.json());
 server.use(deserializeUser);
 
+/**
+ * Create an Express Server
+ */
 server.listen(PORT, async () => {
   log.info(`Server is running on port -- http://localhost:${PORT}`);
   await connect();
