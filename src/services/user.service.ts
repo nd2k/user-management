@@ -59,17 +59,12 @@ export const updateUserDetails = async (
   input: DocumentDefinition<
     Omit<UserDocument, 'createdAt' | 'updatedAt' | 'comparePassword'>
   >
-) => {
+): Promise<UserDocument | null> => {
   try {
     const query = { email: input.email };
     const updatedUser = input;
     const options = { new: true };
-    const newUser = await UserModel.findOneAndUpdate(
-      query,
-      updatedUser,
-      options
-    );
-    return newUser;
+    return await UserModel.findOneAndUpdate(query, updatedUser, options);
   } catch (e: any) {
     throw new Error(e);
   }
